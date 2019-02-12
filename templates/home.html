@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>All available groups</h1>
+    {% for group in groups %}
+        <p><a href="/group/{{ group.group_ID }}">{{ group.group_name }}</a> <br> <a href="/user/{{ group.admin }}">{{ group.admin }}</a></p>
+    {% endfor %}
+
+</body>
+</html>
