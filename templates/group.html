@@ -1,10 +1,52 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Group</title>
+    <link rel="stylesheet" href="{% static 'chatapp/group.css' %}">
 </head>
 <body>
-    <p>{{ group.group_name }} <br> {{ group.group_description }} <br> {{ group.created_date }} <br> {{ group.admin }}</p>
+<p><b>Title:</b>  {{ group.group_name }} <br> <b>Description:</b>  {{ group.group_description }} <br> <b>CreatedOn:</b>  {{ group.created_date }} <br> <b>Admin:</b>  {{ group.admin }}</p>
+    <button onclick="myFunction()">Register</button>
+    <script>
+
+    </script>
+
+
+<header class="page-header">
+  <div class="container ">
+    <h2>{{ group.group_name }}</h2>
+  </div>
+</header>
+<div class="main">
+  <div class="container ">
+    <div class="chat-log">
+      <div class="chat-log__item">
+        <h3 class="chat-log__author">{{ my_msg.from_user }} <small>{{ my_msg.created_date }}</small></h3>
+        <div class="chat-log__message">{{ my_msg.message_text }}</div>
+      </div>
+      <div class="chat-log__item chat-log__item--own">
+        <h3 class="chat-log__author">{{ my_msg.from_user }} <small>{{ my_msg.created_date }}</small></h3>
+        <div class="chat-log__message">{{ my_msg.message_text }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="chat-form">
+    <div class="container ">
+      <form class="form-horizontal">
+        <div class="row">
+          <div class="col-sm-10 col-xs-8">
+            <input type="text" class="form-control" id="" placeholder="Message" />
+          </div>
+          <div class="col-sm-2 col-xs-4">
+            <button type="submit" class="btn btn-success btn-block">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 </html>

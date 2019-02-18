@@ -1,4 +1,3 @@
-from django.db.models import UUIDField
 from django.utils import timezone
 from django.db import models
 import uuid
@@ -15,13 +14,13 @@ class Userinfo(models.Model):
 class ChatBox(models.Model):
     group_name = models.CharField(max_length=200)
     group_description = models.TextField(max_length=420, editable=True, default='Required')
-    group_ID = UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    group_ID = models.CharField(unique=True, default=uuid.uuid4, editable=False, max_length=50, primary_key=True)
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
 
 
 class Message(models.Model):
-    message_ID = UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    message_ID = models.CharField(unique=True, default=uuid.uuid4, editable=False, max_length=50, primary_key=True)
     message_tag = models.CharField(max_length=100)
     message_text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
@@ -35,9 +34,6 @@ class Message(models.Model):
 
 
 class Connected(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(ChatBox, on_delete=models.CASCADE)
-    message = models.ForeignKey(Message, on_delete=models.CASCADE)
+    group_ID = models.ForeignKey(ChatBox, on_delete=models.CASCADE)
+    message_ID = models.ForeignKey(Message, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.user
